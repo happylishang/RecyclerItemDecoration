@@ -80,19 +80,6 @@ public class FullyGridLayoutManager extends GridLayoutManager {
                 RecyclerView.LayoutParams p = (RecyclerView.LayoutParams) view.getLayoutParams();
                 // For adding Item Decor Insets to view
                 super.measureChildWithMargins(view, 0, 0);
-
-//                int childWidthSpec = ViewGroup.getChildMeasureSpec(widthSpec,
-//                        getPaddingLeft() + getPaddingRight()
-//                                + getLeftDecorationWidth(view) + getRightDecorationWidth(view)
-//                        , p.width
-//                );
-//                int childHeightSpec = ViewGroup.getChildMeasureSpec(heightSpec,
-//                        getPaddingTop() + getPaddingBottom()
-//                                + getTopDecorationHeight(view) + getBottomDecorationHeight(view)
-//                        , p.height
-//                );
-//                view.measure(childWidthSpec, childHeightSpec);
-
                 measuredDimension[0] = getDecoratedMeasuredWidth(view) + p.leftMargin + p.rightMargin;
                 measuredDimension[1] = getDecoratedMeasuredHeight(view) + p.bottomMargin + p.topMargin;
 //                recycler.recycleView(view);

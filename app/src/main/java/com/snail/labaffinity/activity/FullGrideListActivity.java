@@ -30,15 +30,16 @@ public class FullGrideListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_list);
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
-        FullyGridLayoutManager layoutManager = new FullyGridLayoutManager(this, 5);
+        FullyGridLayoutManager layoutManager = new FullyGridLayoutManager(this, 4);
         mRecyclerView.setLayoutManager(layoutManager);
         layoutManager.setAutoMeasureEnabled(false);
-        GridLayoutItemDecoration grideItemDorcration = new GridLayoutItemDecoration(this, 5);
+        GridLayoutItemDecoration grideItemDorcration = new GridLayoutItemDecoration( 4);
         grideItemDorcration.setMargin(40, 40);
         mRecyclerView.addItemDecoration(grideItemDorcration);
         mRecyclerView.setAdapter(new BaseAdapter(100));
         mRecyclerView.setNestedScrollingEnabled(false);
-
+//        recyclerview获取焦点自动滚动
+        mRecyclerView.setFocusable(false);
 
         mScrollView = (ScrollView) findViewById(R.id.scrollView);
         mScrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {

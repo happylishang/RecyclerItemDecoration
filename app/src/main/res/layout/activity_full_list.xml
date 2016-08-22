@@ -8,7 +8,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/scrollView"
-                android:fillViewport="true">
+                >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,8 +25,8 @@
                 android:id="@+id/list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="30dp"
-                android:background="#ff000000"/>
+                android:background="@android:color/black"
+                />
 
             <TextView
                 android:layout_width="match_parent"

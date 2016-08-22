@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.snail.labaffinity.R;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -17,13 +18,12 @@ import butterknife.ButterKnife;
  */
 public class BaseListActivity extends AppCompatActivity {
 
-    RecyclerView mRecyclerView;
+    @BindView(R.id.list) RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
-        mRecyclerView = (RecyclerView) findViewById(R.id.list);
         ButterKnife.bind(this);
     }
 }

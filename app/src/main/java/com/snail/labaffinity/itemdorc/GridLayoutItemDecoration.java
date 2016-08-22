@@ -24,6 +24,7 @@ public class GridLayoutItemDecoration extends RecyclerView.ItemDecoration {
     private int mVerticalSpan;
     private ShapeDrawable drawable;
     private Paint mPaint;
+    private GridLayoutManager mGridLayoutManager;
 
     public GridLayoutItemDecoration(int count) {
         mSpanCount = count;
@@ -91,7 +92,7 @@ public class GridLayoutItemDecoration extends RecyclerView.ItemDecoration {
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         final int position = parent.getChildAdapterPosition(view);
         final int totalCount = parent.getAdapter().getItemCount();
-        int everyCharge = mHorizonSpan * 4 / 5;
+        int everyCharge = mHorizonSpan * mSpanCount/ (mSpanCount + 1);
         int modValue = position % mSpanCount;
         //(0 4/5)|(1/5 3/5)|(2/5 2/5)|(3/5 1/5)|(4/5 0)
         final int left = Math.round(modValue * mHorizonSpan / mSpanCount);

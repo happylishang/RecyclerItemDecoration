@@ -19,9 +19,9 @@ public class GrideListActivity extends BaseListActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 4);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 6);
         mRecyclerView.setLayoutManager(layoutManager);
-        GridLayoutItemDecoration grideItemDorcration = new GridLayoutItemDecoration(this, 4);
+        GridLayoutItemDecoration grideItemDorcration = new GridLayoutItemDecoration( 6);
         grideItemDorcration.setMargin(10, 10);
 //        grideItemDorcration.setPaddingColor(0xff0000ff);
         mRecyclerView.addItemDecoration(grideItemDorcration);

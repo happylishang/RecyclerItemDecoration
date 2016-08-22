@@ -38,10 +38,16 @@
         android:text="full_linear"/>
 
 
-
     <Button
         android:id="@+id/stage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="StageLayoutItemDorc"/>
+
+    <Button
+        android:id="@+id/wrap_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="WrapLayoutItemDorc"/>
+
 </LinearLayout>

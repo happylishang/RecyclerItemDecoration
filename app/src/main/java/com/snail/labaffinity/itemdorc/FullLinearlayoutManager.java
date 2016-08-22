@@ -43,8 +43,8 @@ public class FullLinearlayoutManager extends LinearLayoutManager {
         }
         for (int i = 0; i < count; i++) {
             measureScrapChild(recycler, i,
-                    View.MeasureSpec.makeMeasureSpec(i, View.MeasureSpec.UNSPECIFIED),
-                    View.MeasureSpec.makeMeasureSpec(i, View.MeasureSpec.UNSPECIFIED),
+                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
                     mMeasuredDimension);
 
             if (getOrientation() == HORIZONTAL) {
@@ -92,16 +92,12 @@ public class FullLinearlayoutManager extends LinearLayoutManager {
         if (view != null) {
 
             RecyclerView.LayoutParams p = (RecyclerView.LayoutParams) view.getLayoutParams();
-//            int childWidthSpec = ViewGroup.getChildMeasureSpec(widthSpec,
-//                    getPaddingLeft() + getPaddingRight() + getDecoratedLeft(view) + getDecoratedRight(view), p.width);
-//            int childHeightSpec = ViewGroup.getChildMeasureSpec(heightSpec,
-//                    getPaddingTop() + getPaddingBottom() + getPaddingBottom() + getDecoratedBottom(view), p.height);
-//            view.measure(childWidthSpec, childHeightSpec);
 
             // Get decorated measurements
             measuredDimension[0] = getDecoratedMeasuredWidth(view) + p.leftMargin + p.rightMargin;
             measuredDimension[1] = getDecoratedMeasuredHeight(view) + p.bottomMargin + p.topMargin;
-            recycler.recycleView(view);
+//            为什么这里去了，就不会有最底层的一个Itemdocration呢？？
+//            recycler.recycleView(view);
         }    }catch (Exception e){
 
         }

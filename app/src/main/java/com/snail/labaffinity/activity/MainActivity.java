@@ -69,6 +69,12 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, FullLinearListActivity.class);
         startActivity(intent);
     }
+
+    @OnClick(R.id.wrap_linear)
+    void wrap() {
+        Intent intent = new Intent(this, WrapRecycleViewActivity.class);
+        startActivity(intent);
+    }
     @OnClick(R.id.stage)
     void stage() {
 

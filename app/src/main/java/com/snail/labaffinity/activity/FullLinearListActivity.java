@@ -8,11 +8,14 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.ViewTreeObserver;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.snail.labaffinity.R;
+import com.snail.labaffinity.SimpleOnItemTouchListener.SimpleOnItemClickLister;
 import com.snail.labaffinity.adapter.BaseAdapter;
 import com.snail.labaffinity.itemdorc.FullLinearlayoutManager;
 import com.snail.labaffinity.itemdorc.LinearItemDecorationration;
+import com.snail.labaffinity.viewholder.ItemViewHolder;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -43,17 +46,23 @@ public class FullLinearListActivity extends AppCompatActivity {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         layoutManager.setAutoMeasureEnabled(false);
         mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setFocusable(false);
+        mRecyclerView.addOnItemTouchListener(new SimpleOnItemClickLister<ItemViewHolder>(mRecyclerView) {
+
+            @Override
+            public void onItemClick(ItemViewHolder vh, int postion) {
+                Toast.makeText(FullLinearListActivity.this, "" + postion, Toast.LENGTH_SHORT).show();
+            }
+        });
 
 //        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 //        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 //        mRecyclerView.setLayoutManager(linearLayoutManager);
 
         mRecyclerView.setNestedScrollingEnabled(false);
-
         LinearItemDecorationration grideItemDorcration = new LinearItemDecorationration(this, LinearLayoutManager.VERTICAL);
         mRecyclerView.addItemDecoration(grideItemDorcration);
-
-        mRecyclerView.setAdapter(new BaseAdapter(100));
+        mRecyclerView.setAdapter(new BaseAdapter(40));
         mRecyclerView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
 
             @Override
