@@ -23,10 +23,7 @@ public class GrideListActivity extends BaseListActivity {
         mRecyclerView.setLayoutManager(layoutManager);
         GridLayoutItemDecoration grideItemDorcration = new GridLayoutItemDecoration( 6);
         grideItemDorcration.setMargin(10, 10);
-//        grideItemDorcration.setPaddingColor(0xff0000ff);
         mRecyclerView.addItemDecoration(grideItemDorcration);
-
-
-        mRecyclerView.setAdapter(new BaseAdapter(60));
+        mRecyclerView.setAdapter(new BaseAdapter(200));
     }
 }

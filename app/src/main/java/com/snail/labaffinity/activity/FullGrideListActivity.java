@@ -4,9 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.ViewTreeObserver;
-import android.widget.ScrollView;
 
 import com.snail.labaffinity.R;
 import com.snail.labaffinity.adapter.BaseAdapter;
@@ -22,8 +19,6 @@ import com.snail.labaffinity.itemdorc.GridLayoutItemDecoration;
 public class FullGrideListActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private ScrollView mScrollView;
-
     //    线性的没多大用途
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,19 +29,11 @@ public class FullGrideListActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(layoutManager);
         layoutManager.setAutoMeasureEnabled(false);
         GridLayoutItemDecoration grideItemDorcration = new GridLayoutItemDecoration( 4);
-        grideItemDorcration.setMargin(40, 40);
+        grideItemDorcration.setMargin(10, 10);
         mRecyclerView.addItemDecoration(grideItemDorcration);
         mRecyclerView.setAdapter(new BaseAdapter(100));
         mRecyclerView.setNestedScrollingEnabled(false);
 //        recyclerview获取焦点自动滚动
         mRecyclerView.setFocusable(false);
-
-        mScrollView = (ScrollView) findViewById(R.id.scrollView);
-        mScrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
-            @Override
-            public void onScrollChanged() {
-                Log.v("lishang", " s " + mScrollView.getScrollY());
-            }
-        });
     }
 }
