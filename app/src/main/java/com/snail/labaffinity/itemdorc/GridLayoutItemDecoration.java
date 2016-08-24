@@ -5,7 +5,6 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.ShapeDrawable;
 import android.support.annotation.ColorInt;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -92,11 +91,12 @@ public class GridLayoutItemDecoration extends RecyclerView.ItemDecoration {
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         final int position = parent.getChildAdapterPosition(view);
         final int totalCount = parent.getAdapter().getItemCount();
-        int everyCharge = mHorizonSpan * mSpanCount/ (mSpanCount + 1);
+        int everyCharge = mHorizonSpan * (mSpanCount-1)/ (mSpanCount);
         int modValue = position % mSpanCount;
         //(0 4/5)|(1/5 3/5)|(2/5 2/5)|(3/5 1/5)|(4/5 0)
         final int left = Math.round(modValue * mHorizonSpan / mSpanCount);
         final int right = everyCharge - left;
+
         if (!isLastRaw(parent, position, mSpanCount, totalCount)) {
             outRect.set(left, 0, right, mVerticalSpan);
         } else {
