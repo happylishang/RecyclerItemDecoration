@@ -6,12 +6,12 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-public class FullyGridLayoutManager extends GridLayoutManager {
-    public FullyGridLayoutManager(Context context, int spanCount) {
+public class ExpandedGridLayoutManager extends GridLayoutManager {
+    public ExpandedGridLayoutManager(Context context, int spanCount) {
         super(context, spanCount);
     }
 
-    public FullyGridLayoutManager(Context context, int spanCount, int orientation, boolean reverseLayout) {
+    public ExpandedGridLayoutManager(Context context, int spanCount, int orientation, boolean reverseLayout) {
         super(context, spanCount, orientation, reverseLayout);
     }
 

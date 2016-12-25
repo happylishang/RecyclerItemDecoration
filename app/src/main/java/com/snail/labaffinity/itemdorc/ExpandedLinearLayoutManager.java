@@ -9,16 +9,16 @@ import android.view.View;
 /**
  * Created by lishang on 16/5/11.
  */
-public class FullLinearlayoutManager extends LinearLayoutManager {
-    public FullLinearlayoutManager(Context context) {
+public class ExpandedLinearLayoutManager extends LinearLayoutManager {
+    public ExpandedLinearLayoutManager(Context context) {
         super(context);
     }
 
-    public FullLinearlayoutManager(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public ExpandedLinearLayoutManager(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    public FullLinearlayoutManager(Context context, int orientation, boolean reverseLayout) {
+    public ExpandedLinearLayoutManager(Context context, int orientation, boolean reverseLayout) {
         super(context, orientation, reverseLayout);
     }
 

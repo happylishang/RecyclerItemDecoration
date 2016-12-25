@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.snail.labaffinity.R;
 import com.snail.labaffinity.adapter.BaseAdapter;
-import com.snail.labaffinity.itemdorc.FullyGridLayoutManager;
+import com.snail.labaffinity.itemdorc.ExpandedGridLayoutManager;
 import com.snail.labaffinity.itemdorc.GridLayoutItemDecoration;
 
 /**
@@ -25,7 +25,7 @@ public class FullGrideListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_list);
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
-        FullyGridLayoutManager layoutManager = new FullyGridLayoutManager(this, 4);
+        ExpandedGridLayoutManager layoutManager = new ExpandedGridLayoutManager(this, 4);
         mRecyclerView.setLayoutManager(layoutManager);
         layoutManager.setAutoMeasureEnabled(false);
         GridLayoutItemDecoration grideItemDorcration = new GridLayoutItemDecoration( 4);

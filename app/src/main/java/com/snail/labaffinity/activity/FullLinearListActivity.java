@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.snail.labaffinity.R;
 import com.snail.labaffinity.SimpleOnItemTouchListener.SimpleOnItemClickLister;
 import com.snail.labaffinity.adapter.BaseAdapter;
-import com.snail.labaffinity.itemdorc.FullLinearlayoutManager;
+import com.snail.labaffinity.itemdorc.ExpandedLinearLayoutManager;
 import com.snail.labaffinity.itemdorc.LinearItemDecoration;
 import com.snail.labaffinity.viewholder.ItemViewHolder;
 
@@ -42,7 +42,7 @@ public class FullLinearListActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
 
-        FullLinearlayoutManager layoutManager = new FullLinearlayoutManager(this);
+        ExpandedLinearLayoutManager layoutManager = new ExpandedLinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         layoutManager.setAutoMeasureEnabled(false);
         mRecyclerView.setLayoutManager(layoutManager);

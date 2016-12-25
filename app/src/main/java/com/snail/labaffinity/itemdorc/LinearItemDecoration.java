@@ -21,7 +21,7 @@ public class LinearItemDecoration extends RecyclerView.ItemDecoration {
     public static final int VERTICAL_LIST = LinearLayoutManager.VERTICAL;
     private Drawable mDivider;
     private int mOrientation;
-    private int mSpanSpace = 30;
+    private int mSpanSpace = 20;
 
     public LinearItemDecoration(int orientation) {
         mDivider = new ShapeDrawable();
