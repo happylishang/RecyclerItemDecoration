@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.LinearListActivity"/>
-        <activity android:name=".activity.GrideListActivity"/>
+        <activity android:name=".activity.GridListActivity"/>
         <activity android:name=".activity.FullGrideListActivity"/>
         <activity android:name=".activity.FullLinearListActivity"/>
         <activity android:name=".activity.WrapRecycleViewActivity"/>

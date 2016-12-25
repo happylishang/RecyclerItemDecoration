@@ -2,6 +2,7 @@ package com.snail.labaffinity.itemdorc;
 
 import android.graphics.Rect;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
@@ -17,56 +18,98 @@ public class GridLayoutItemDecoration extends RecyclerView.ItemDecoration {
     private int mSpanCount;
     private int mHorizonSpan;
     private int mVerticalSpan;
-    private GridLayoutManager mGridLayoutManager;
+    private int mOrientation;
 
     public GridLayoutItemDecoration(int count) {
         mSpanCount = count;
         setMargin(20, 20);
+        mOrientation = GridLayoutManager.VERTICAL;
     }
 
-    public GridLayoutItemDecoration(int count, int horizonSpan, int verticalSpan) {
+    public GridLayoutItemDecoration(int count, int orientation) {
+        mSpanCount = count;
+        setMargin(20, 20);
+        setOrientation(orientation);
+    }
+
+    public GridLayoutItemDecoration(int count, int orientation, int horizonSpan, int verticalSpan) {
         this(count);
         setMargin(horizonSpan, verticalSpan);
+        setOrientation(orientation);
     }
+
+    public void setOrientation(int orientation) {
+        if (orientation != LinearLayoutManager.HORIZONTAL && orientation != LinearLayoutManager.VERTICAL) {
+            throw new IllegalArgumentException("invalid orientation");
+        }
+        mOrientation = orientation;
+    }
+
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         final int position = parent.getChildAdapterPosition(view);
         final int totalCount = parent.getAdapter().getItemCount();
-        int everyCharge = mHorizonSpan * (mSpanCount - 1) / (mSpanCount);
-        int modValue = position % mSpanCount;
-        final int left = Math.round(modValue * mHorizonSpan / mSpanCount);
-        final int right = everyCharge - left;
-
-        if (!isLastRaw(parent, position, mSpanCount, totalCount)) {
-            outRect.set(left, 0, right, mVerticalSpan);
+        int left = (position % mSpanCount == 0) ? 0 : mHorizonSpan;
+        int bottom = ((position + 1) % mSpanCount == 0) ? 0 : mVerticalSpan;
+        if (isVertical(parent)) {
+            if (!isLastRaw(parent, position, mSpanCount, totalCount)) {
+                outRect.set(left, 0, 0, mVerticalSpan);
+            } else {
+                outRect.set(left, 0, 0, 0);
+            }
         } else {
-            outRect.set(left, 0, right, 0);
+            if (!isLastColumn(parent, position, mSpanCount, totalCount)) {
+                outRect.set(0, 0, mHorizonSpan, bottom);
+            } else {
+                outRect.set(0, 0, 0, bottom);
+            }
         }
     }
 
-    public void setMargin(int horizion, int vertical) {
-        mHorizonSpan = horizion;
+    private boolean isVertical(RecyclerView parent) {
+        RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
+        if (layoutManager instanceof GridLayoutManager) {
+            int orientation = ((GridLayoutManager) layoutManager)
+                    .getOrientation();
+            return orientation == StaggeredGridLayoutManager.VERTICAL;
+        } else if (layoutManager instanceof StaggeredGridLayoutManager) {
+            int orientation = ((StaggeredGridLayoutManager) layoutManager)
+                    .getOrientation();
+            return orientation == StaggeredGridLayoutManager.VERTICAL;
+        }
+        return false;
+    }
+
+    public void setMargin(int horizon, int vertical) {
+        mHorizonSpan = horizon;
         mVerticalSpan = vertical;
     }
 
     private boolean isLastRaw(RecyclerView parent, int pos, int spanCount,
                               int childCount) {
-        RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
-        if (layoutManager instanceof GridLayoutManager) {
-            if ((pos - pos % spanCount) + spanCount >= childCount)// 如果是最后一行，则不需要绘制底部
+        if (isVertical(parent)) {
+            if ((pos - pos % spanCount) + spanCount >= childCount)
                 return true;
-        } else if (layoutManager instanceof StaggeredGridLayoutManager) {
-            int orientation = ((StaggeredGridLayoutManager) layoutManager)
-                    .getOrientation();
-            if (orientation == StaggeredGridLayoutManager.VERTICAL) {
-                if ((pos - pos % spanCount) + spanCount >= childCount)
-                    return true;
-            } else {
-                if ((pos + 1) % spanCount == 0) {
-                    return true;
-                }
+        } else {
+            if ((pos + 1) % spanCount == 0) {
+                return true;
             }
+        }
+        return false;
+    }
+
+
+    private boolean isLastColumn(RecyclerView parent, int pos, int spanCount,
+                                 int childCount) {
+        if (isVertical(parent)) {
+            if ((pos + 1) % spanCount == 0) {
+                return true;
+            }
+        } else {
+            childCount = childCount - childCount % spanCount;
+            if (pos >= childCount)
+                return true;
         }
         return false;
     }

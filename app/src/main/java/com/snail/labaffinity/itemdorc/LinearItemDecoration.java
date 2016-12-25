@@ -13,13 +13,12 @@ import android.view.View;
  */
 public class LinearItemDecoration extends RecyclerView.ItemDecoration {
 
-    public static final int HORIZONTAL_LIST = LinearLayoutManager.HORIZONTAL;
-    public static final int VERTICAL_LIST = LinearLayoutManager.VERTICAL;
     private int mOrientation;
     private int mSpanSpace = 20;
 
     public LinearItemDecoration(int orientation) {
         setOrientation(orientation);
+        mOrientation = LinearLayoutManager.VERTICAL;
     }
 
     public LinearItemDecoration(int orientation, int span) {
@@ -28,7 +27,7 @@ public class LinearItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     private void setOrientation(int orientation) {
-        if (orientation != HORIZONTAL_LIST && orientation != VERTICAL_LIST) {
+        if (orientation != LinearLayoutManager.HORIZONTAL && orientation != LinearLayoutManager.VERTICAL) {
             throw new IllegalArgumentException("invalid orientation");
         }
         mOrientation = orientation;
@@ -36,7 +35,7 @@ public class LinearItemDecoration extends RecyclerView.ItemDecoration {
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-        if (mOrientation == VERTICAL_LIST) {
+        if (mOrientation == LinearLayoutManager.VERTICAL) {
             if (parent.getChildAdapterPosition(view) < parent.getAdapter().getItemCount() - 1) {
                 outRect.set(0, 0, 0, mSpanSpace);
             } else {

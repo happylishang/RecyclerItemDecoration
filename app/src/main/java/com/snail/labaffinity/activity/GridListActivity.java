@@ -3,6 +3,7 @@ package com.snail.labaffinity.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 
 import com.snail.labaffinity.adapter.BaseAdapter;
 import com.snail.labaffinity.itemdorc.GridLayoutItemDecoration;
@@ -13,7 +14,7 @@ import com.snail.labaffinity.itemdorc.GridLayoutItemDecoration;
  * Des:
  * version:
  */
-public class GrideListActivity extends BaseListActivity {
+public class GridListActivity extends BaseListActivity {
 
     //    线性的没多大用途
     @Override
@@ -21,9 +22,11 @@ public class GrideListActivity extends BaseListActivity {
         super.onCreate(savedInstanceState);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 6);
         mRecyclerView.setLayoutManager(layoutManager);
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+
         GridLayoutItemDecoration grideItemDorcration = new GridLayoutItemDecoration( 6);
         grideItemDorcration.setMargin(10, 10);
         mRecyclerView.addItemDecoration(grideItemDorcration);
-        mRecyclerView.setAdapter(new BaseAdapter(200));
+        mRecyclerView.setAdapter(new BaseAdapter(100));
     }
 }

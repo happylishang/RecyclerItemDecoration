@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.gird)
     void gride() {
-        Intent intent = new Intent(this, GrideListActivity.class);
+        Intent intent = new Intent(this, GridListActivity.class);
         startActivity(intent);
     }
 
