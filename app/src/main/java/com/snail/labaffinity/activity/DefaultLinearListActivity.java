@@ -7,7 +7,6 @@ import android.widget.Toast;
 
 import com.snail.labaffinity.SimpleOnItemTouchListener.SimpleOnItemClickLister;
 import com.snail.labaffinity.adapter.BaseAdapter;
-import com.snail.labaffinity.itemdorc.LinearItemDecoration;
 import com.snail.labaffinity.viewholder.ItemViewHolder;
 
 /**
@@ -16,9 +15,7 @@ import com.snail.labaffinity.viewholder.ItemViewHolder;
  * Des:
  * version:
  */
-public class LinearListActivity extends BaseListActivity {
-
-    private String TAG = "LinearListActivity";
+public class DefaultLinearListActivity extends BaseListActivity {
 
     //    线性的没多大用途
     @Override
@@ -27,13 +24,12 @@ public class LinearListActivity extends BaseListActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        mRecyclerView.addItemDecoration(new LinearItemDecoration(LinearLayoutManager.VERTICAL));
         mRecyclerView.setAdapter(new BaseAdapter(30));
         mRecyclerView.addOnItemTouchListener(new SimpleOnItemClickLister<ItemViewHolder>(mRecyclerView) {
 
             @Override
             public void onItemClick(ItemViewHolder vh, int postion) {
-                Toast.makeText(LinearListActivity.this, "" + postion, Toast.LENGTH_SHORT).show();
+                Toast.makeText(DefaultLinearListActivity.this, "" + postion, Toast.LENGTH_SHORT).show();
             }
         });
     }

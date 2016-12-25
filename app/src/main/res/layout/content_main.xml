@@ -15,39 +15,49 @@
     tools:showIn="@layout/activity_main">
 
     <Button
+        android:id="@+id/default_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="默认的线性列表"/>
+
+    <Button
         android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="LinearLayoutItemDorc"/>
+        android:text="带分割线的线性列表"/>
 
     <Button
         android:id="@+id/gird"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="GirdLayoutItemDorc"/>
+        android:text="带分割线的九宫格布局"/>
 
     <Button
         android:id="@+id/full_gide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="FullGride"/>
+        android:text="全展开的九宫格布局"/>
+
     <Button
         android:id="@+id/full_linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="full_linear"/>
+        android:text="全展开的线性列表"/>
 
 
     <Button
         android:id="@+id/stage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="StageLayoutItemDorc"/>
+        android:text="StageLayoutItemDorc"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/wrap_linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="WrapLayoutItemDorc"/>
+        android:text="WrapLayoutItemDorc"
+        android:visibility="gone"/>
+
 
 </LinearLayout>

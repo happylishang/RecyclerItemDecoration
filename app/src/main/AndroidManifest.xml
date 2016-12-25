@@ -23,6 +23,7 @@
         <activity android:name=".activity.FullGrideListActivity"/>
         <activity android:name=".activity.FullLinearListActivity"/>
         <activity android:name=".activity.WrapRecycleViewActivity"/>
+        <activity android:name=".activity.DefaultLinearListActivity"/>
     </application>
 
 </manifest>

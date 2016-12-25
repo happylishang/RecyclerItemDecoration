@@ -79,4 +79,10 @@ public class MainActivity extends AppCompatActivity {
     void stage() {
 
     }
+    @OnClick(R.id.default_linear)
+    void defaultLinear() {
+        Intent intent = new Intent(this, DefaultLinearListActivity.class);
+        startActivity(intent);
+    }
+
 }
