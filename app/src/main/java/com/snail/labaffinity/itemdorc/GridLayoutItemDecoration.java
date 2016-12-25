@@ -81,7 +81,7 @@ public class GridLayoutItemDecoration extends RecyclerView.ItemDecoration {
             final int top = child.getTop() + params.topMargin;
             final int bottom = child.getBottom() + params.bottomMargin;
             final int right = left + mHorizonSpan;
-            if (!isLastColum(parent, i, mSpanCount, totalCount)) {
+            if (!isLastColumn(parent, i, mSpanCount, totalCount)) {
                 drawable.setBounds(left, top, right, bottom);
                 drawable.draw(c);
             }
@@ -120,8 +120,8 @@ public class GridLayoutItemDecoration extends RecyclerView.ItemDecoration {
         // 添加浮层
     }
 
-    private boolean isLastColum(RecyclerView parent, int pos, int spanCount,
-                                int childCount) {
+    private boolean isLastColumn(RecyclerView parent, int pos, int spanCount,
+                                 int childCount) {
         RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
         if (layoutManager instanceof GridLayoutManager) {
             if ((pos + 1) % spanCount == 0)// 如果是最后一列，则不需要绘制右边

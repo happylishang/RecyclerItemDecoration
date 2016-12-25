@@ -14,7 +14,7 @@ import com.snail.labaffinity.R;
 import com.snail.labaffinity.SimpleOnItemTouchListener.SimpleOnItemClickLister;
 import com.snail.labaffinity.adapter.BaseAdapter;
 import com.snail.labaffinity.itemdorc.FullLinearlayoutManager;
-import com.snail.labaffinity.itemdorc.LinearItemDecorationration;
+import com.snail.labaffinity.itemdorc.LinearItemDecoration;
 import com.snail.labaffinity.viewholder.ItemViewHolder;
 
 import butterknife.ButterKnife;
@@ -60,7 +60,7 @@ public class FullLinearListActivity extends AppCompatActivity {
 //        mRecyclerView.setLayoutManager(linearLayoutManager);
 
         mRecyclerView.setNestedScrollingEnabled(false);
-        LinearItemDecorationration grideItemDorcration = new LinearItemDecorationration(this, LinearLayoutManager.VERTICAL);
+        LinearItemDecoration grideItemDorcration = new LinearItemDecoration( LinearLayoutManager.VERTICAL);
         mRecyclerView.addItemDecoration(grideItemDorcration);
         mRecyclerView.setAdapter(new BaseAdapter(40));
         mRecyclerView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
