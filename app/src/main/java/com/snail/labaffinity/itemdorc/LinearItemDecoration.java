@@ -21,10 +21,16 @@ public class LinearItemDecoration extends RecyclerView.ItemDecoration {
     public static final int VERTICAL_LIST = LinearLayoutManager.VERTICAL;
     private Drawable mDivider;
     private int mOrientation;
+    private int mSpanSpace = 30;
 
-    public LinearItemDecoration( int orientation) {
+    public LinearItemDecoration(int orientation) {
         mDivider = new ShapeDrawable();
         setOrientation(orientation);
+    }
+
+    public LinearItemDecoration(int orientation, int span) {
+        this(orientation);
+        mSpanSpace = span;
     }
 
     private void setOrientation(int orientation) {
@@ -53,11 +59,11 @@ public class LinearItemDecoration extends RecyclerView.ItemDecoration {
                     .getLayoutParams();
             final int top = child.getBottom() + params.bottomMargin +
                     Math.round(ViewCompat.getTranslationY(child));
-            final int bottom = top + 30;
+            final int bottom = top + mSpanSpace;
             if (i < parent.getAdapter().getItemCount() - 1) {
                 mDivider.setBounds(left, top, right, bottom);
                 mDivider.draw(c);
-            }else {
+            } else {
                 mDivider.setBounds(left, top, right, top);
                 mDivider.draw(c);
             }
@@ -74,8 +80,8 @@ public class LinearItemDecoration extends RecyclerView.ItemDecoration {
                     .getLayoutParams();
             final int left = child.getRight() + params.rightMargin +
                     Math.round(ViewCompat.getTranslationX(child));
-            final int right = left + mDivider.getIntrinsicHeight();
-            if (i < parent.getAdapter().getItemCount() - 1){
+            final int right = left + mSpanSpace;
+            if (i < parent.getAdapter().getItemCount() - 1) {
                 mDivider.setBounds(left, top, right, bottom);
                 mDivider.draw(c);
             }
@@ -86,13 +92,13 @@ public class LinearItemDecoration extends RecyclerView.ItemDecoration {
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         if (mOrientation == VERTICAL_LIST) {
             if (parent.getChildAdapterPosition(view) < parent.getAdapter().getItemCount() - 1) {
-                outRect.set(0, 0, 0, 30);
+                outRect.set(0, 0, 0, mSpanSpace);
             } else {
                 outRect.set(0, 0, 0, 0);
             }
         } else {
             if (parent.getChildAdapterPosition(view) < parent.getAdapter().getItemCount() - 1) {
-                outRect.set(0, 0, mDivider.getIntrinsicWidth(), 0);
+                outRect.set(0, 0, mSpanSpace, 0);
             } else {
                 outRect.set(0, 0, 0, 0);
             }
