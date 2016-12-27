@@ -4,6 +4,7 @@ package com.snail.labaffinity.itemdorc;
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 public class ExpandedGridLayoutManager extends GridLayoutManager {
@@ -28,10 +29,7 @@ public class ExpandedGridLayoutManager extends GridLayoutManager {
         int count = getItemCount();
         int span = getSpanCount();
         for (int i = 0; i < count; i++) {
-            measureScrapChild(recycler, i,
-                    View.MeasureSpec.makeMeasureSpec(i, View.MeasureSpec.UNSPECIFIED),
-                    View.MeasureSpec.makeMeasureSpec(i, View.MeasureSpec.UNSPECIFIED),
-                    mMeasuredDimension);
+            mMeasuredDimension = getChildDimension(recycler, i);
             if (getOrientation() == HORIZONTAL) {
                 if (i % span == 0) {
                     width = width + mMeasuredDimension[0];
@@ -66,26 +64,21 @@ public class ExpandedGridLayoutManager extends GridLayoutManager {
         requestLayout();
     }
 
-    private void measureScrapChild(RecyclerView.Recycler recycler, int position, int widthSpec,
-                                   int heightSpec, int[] measuredDimension) {
 
-        if (position < getItemCount()) {
-            try {
-                View view = recycler.getViewForPosition(position); //fix 动态添加时报IndexOutOfBoundsException
-                if (view.getVisibility() == View.GONE) {
-                    measuredDimension[0] = 0;
-                    measuredDimension[1] = 0;
-                    return;
-                }
-                RecyclerView.LayoutParams p = (RecyclerView.LayoutParams) view.getLayoutParams();
-                // For adding Item Decor Insets to view
-                super.measureChildWithMargins(view, 0, 0);
-                measuredDimension[0] = getDecoratedMeasuredWidth(view) + p.leftMargin + p.rightMargin;
-                measuredDimension[1] = getDecoratedMeasuredHeight(view) + p.bottomMargin + p.topMargin;
-//                recycler.recycleView(view);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    private int[] getChildDimension(RecyclerView.Recycler recycler, int position) {
+        try {
+            int[] measuredDimension = new int[2];
+            View view = recycler.getViewForPosition(position);
+            //测量childView，以便获得宽高（包括ItemDecoration的限制）
+            super.measureChildWithMargins(view, 0, 0);
+            //获取childView，以便获得宽高（包括ItemDecoration的限制），以及边距
+            RecyclerView.LayoutParams p = (RecyclerView.LayoutParams) view.getLayoutParams();
+            measuredDimension[0] = getDecoratedMeasuredWidth(view) + p.leftMargin + p.rightMargin;
+            measuredDimension[1] = getDecoratedMeasuredHeight(view) + p.bottomMargin + p.topMargin;
+            return measuredDimension;
+        } catch (Exception e) {
+            Log.d("LayoutManager", e.toString());
         }
+        return null;
     }
 }

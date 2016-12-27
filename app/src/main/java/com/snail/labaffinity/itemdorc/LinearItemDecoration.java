@@ -13,29 +13,19 @@ import android.view.View;
  */
 public class LinearItemDecoration extends RecyclerView.ItemDecoration {
 
-    private int mOrientation;
+
     private int mSpanSpace = 20;
 
-    public LinearItemDecoration(int orientation) {
-        setOrientation(orientation);
-        mOrientation = LinearLayoutManager.VERTICAL;
+    public LinearItemDecoration() {
     }
 
-    public LinearItemDecoration(int orientation, int span) {
-        this(orientation);
+    public LinearItemDecoration(int span) {
         mSpanSpace = span;
-    }
-
-    private void setOrientation(int orientation) {
-        if (orientation != LinearLayoutManager.HORIZONTAL && orientation != LinearLayoutManager.VERTICAL) {
-            throw new IllegalArgumentException("invalid orientation");
-        }
-        mOrientation = orientation;
     }
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-        if (mOrientation == LinearLayoutManager.VERTICAL) {
+        if (isVertical(parent)) {
             if (parent.getChildAdapterPosition(view) < parent.getAdapter().getItemCount() - 1) {
                 outRect.set(0, 0, 0, mSpanSpace);
             } else {
@@ -48,5 +38,15 @@ public class LinearItemDecoration extends RecyclerView.ItemDecoration {
                 outRect.set(0, 0, 0, 0);
             }
         }
+    }
+
+    private boolean isVertical(RecyclerView parent) {
+        RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
+        if (layoutManager instanceof LinearLayoutManager) {
+            int orientation = ((LinearLayoutManager) layoutManager)
+                    .getOrientation();
+            return orientation == LinearLayoutManager.VERTICAL;
+        }
+        return false;
     }
 }

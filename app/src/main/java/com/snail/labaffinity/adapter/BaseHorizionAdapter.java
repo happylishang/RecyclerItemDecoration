@@ -14,7 +14,7 @@ import com.snail.labaffinity.viewholder.ItemViewHolder;
  * Des:
  * version:
  */
-public class BaseAdapter extends RecyclerView.Adapter<ItemViewHolder> {
+public class BaseHorizionAdapter extends RecyclerView.Adapter<ItemViewHolder> {
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -29,7 +29,7 @@ public class BaseAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 //        }
 //        textView.setGravity(Gravity.CENTER);
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_horizion,parent,false);
         return new ItemViewHolder(view);
     }
 
@@ -45,7 +45,7 @@ public class BaseAdapter extends RecyclerView.Adapter<ItemViewHolder> {
         return mCount;
     }
 
-   public BaseAdapter(int size){
+   public BaseHorizionAdapter(int size){
         mCount =size;
     }
 }

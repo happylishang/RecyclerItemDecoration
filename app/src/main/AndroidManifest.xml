@@ -24,6 +24,7 @@
         <activity android:name=".activity.FullLinearListActivity"/>
         <activity android:name=".activity.WrapRecycleViewActivity"/>
         <activity android:name=".activity.DefaultLinearListActivity"/>
+        <activity android:name=".activity.HoriziontFullLinearListActivity"/>
     </application>
 
 </manifest>

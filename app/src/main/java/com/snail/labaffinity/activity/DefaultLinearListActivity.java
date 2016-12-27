@@ -6,7 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.widget.Toast;
 
 import com.snail.labaffinity.SimpleOnItemTouchListener.SimpleOnItemClickLister;
-import com.snail.labaffinity.adapter.BaseAdapter;
+import com.snail.labaffinity.adapter.BaseVerticalAdapter;
 import com.snail.labaffinity.viewholder.ItemViewHolder;
 
 /**
@@ -24,7 +24,7 @@ public class DefaultLinearListActivity extends BaseListActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        mRecyclerView.setAdapter(new BaseAdapter(30));
+        mRecyclerView.setAdapter(new BaseVerticalAdapter(30));
         mRecyclerView.addOnItemTouchListener(new SimpleOnItemClickLister<ItemViewHolder>(mRecyclerView) {
 
             @Override

@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 
-import com.snail.labaffinity.adapter.BaseAdapter;
+import com.snail.labaffinity.adapter.BaseVerticalAdapter;
 import com.snail.labaffinity.itemdorc.GridLayoutItemDecoration;
 
 /**
@@ -27,6 +27,6 @@ public class GridListActivity extends BaseListActivity {
         GridLayoutItemDecoration itemDecoration = new GridLayoutItemDecoration(6);
         itemDecoration.setMargin(10, 10);
         mRecyclerView.addItemDecoration(itemDecoration);
-        mRecyclerView.setAdapter(new BaseAdapter(100));
+        mRecyclerView.setAdapter(new BaseVerticalAdapter(100));
     }
 }

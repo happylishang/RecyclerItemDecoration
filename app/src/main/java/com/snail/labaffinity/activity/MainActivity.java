@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
+        // Handle action bar item_vertical clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
@@ -75,9 +75,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, WrapRecycleViewActivity.class);
         startActivity(intent);
     }
-    @OnClick(R.id.stage)
-    void stage() {
-
+    @OnClick(R.id.horizion_full_list)
+    void horizion_full_list() {
+        Intent intent = new Intent(this, HoriziontFullLinearListActivity.class);
+        startActivity(intent);
     }
     @OnClick(R.id.default_linear)
     void defaultLinear() {

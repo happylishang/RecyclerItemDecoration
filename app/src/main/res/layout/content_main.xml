@@ -46,11 +46,11 @@
 
 
     <Button
-        android:id="@+id/stage"
+        android:id="@+id/horizion_full_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="StageLayoutItemDorc"
-        android:visibility="gone"/>
+        android:text="水平全展开列表"
+      />
 
     <Button
         android:id="@+id/wrap_linear"

@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 
 import com.snail.labaffinity.R;
-import com.snail.labaffinity.adapter.BaseAdapter;
+import com.snail.labaffinity.adapter.BaseVerticalAdapter;
 import com.snail.labaffinity.itemdorc.ExpandedGridLayoutManager;
 import com.snail.labaffinity.itemdorc.GridLayoutItemDecoration;
 
@@ -31,7 +31,7 @@ public class FullGrideListActivity extends AppCompatActivity {
         GridLayoutItemDecoration grideItemDorcration = new GridLayoutItemDecoration( 4);
         grideItemDorcration.setMargin(10, 10);
         mRecyclerView.addItemDecoration(grideItemDorcration);
-        mRecyclerView.setAdapter(new BaseAdapter(100));
+        mRecyclerView.setAdapter(new BaseVerticalAdapter(100));
         mRecyclerView.setNestedScrollingEnabled(false);
 //        recyclerview获取焦点自动滚动
         mRecyclerView.setFocusable(false);

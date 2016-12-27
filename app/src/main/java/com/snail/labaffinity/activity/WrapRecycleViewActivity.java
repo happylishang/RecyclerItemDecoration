@@ -7,7 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.snail.labaffinity.R;
-import com.snail.labaffinity.adapter.BaseAdapter;
+import com.snail.labaffinity.adapter.BaseVerticalAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,6 +47,6 @@ public class WrapRecycleViewActivity extends AppCompatActivity {
 //        mRecyclerView = (RecyclerView) findViewById(R.id.list);
         LinearLayoutManager layoutmanger=new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutmanger);
-        mRecyclerView.setAdapter(new BaseAdapter(3));
+        mRecyclerView.setAdapter(new BaseVerticalAdapter(3));
     }
 }
