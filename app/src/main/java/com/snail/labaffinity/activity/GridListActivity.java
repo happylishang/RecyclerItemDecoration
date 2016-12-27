@@ -25,7 +25,7 @@ public class GridListActivity extends BaseListActivity {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
         GridLayoutItemDecoration itemDecoration = new GridLayoutItemDecoration(6);
-        itemDecoration.setMargin(10, 10);
+        itemDecoration.setDivideParams(10, 10);
         mRecyclerView.addItemDecoration(itemDecoration);
         mRecyclerView.setAdapter(new BaseVerticalAdapter(100));
     }

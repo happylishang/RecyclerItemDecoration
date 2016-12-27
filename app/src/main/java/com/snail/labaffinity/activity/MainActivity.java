@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.full_gide)
     void fullGride() {
-        Intent intent = new Intent(this, FullGrideListActivity.class);
+        Intent intent = new Intent(this, FullGridListActivity.class);
         startActivity(intent);
     }
 
@@ -70,19 +70,19 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    @OnClick(R.id.wrap_linear)
-    void wrap() {
-        Intent intent = new Intent(this, WrapRecycleViewActivity.class);
-        startActivity(intent);
-    }
     @OnClick(R.id.horizion_full_list)
     void horizion_full_list() {
-        Intent intent = new Intent(this, HoriziontFullLinearListActivity.class);
+        Intent intent = new Intent(this, HorizonFullLinearListActivity.class);
         startActivity(intent);
     }
     @OnClick(R.id.default_linear)
     void defaultLinear() {
         Intent intent = new Intent(this, DefaultLinearListActivity.class);
+        startActivity(intent);
+    }
+    @OnClick(R.id.HorizonFullGridListActivity)
+    void HorizonFullGridListActivity() {
+        Intent intent = new Intent(this, HorizonFullGridListActivity.class);
         startActivity(intent);
     }
 

@@ -28,7 +28,7 @@ public class LinearListActivity extends BaseListActivity {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.addItemDecoration(new LinearItemDecoration());
-        mRecyclerView.setAdapter(new BaseVerticalAdapter(30));
+        mRecyclerView.setAdapter(new BaseVerticalAdapter(20));
         mRecyclerView.addOnItemTouchListener(new SimpleOnItemClickLister<ItemViewHolder>(mRecyclerView) {
 
             @Override

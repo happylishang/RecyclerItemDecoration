@@ -22,19 +22,19 @@ public class GridLayoutItemDecoration extends RecyclerView.ItemDecoration {
 
     public GridLayoutItemDecoration(int count) {
         mSpanCount = count;
-        setMargin(20, 20);
+        setDivideParams(20, 20);
         mOrientation = GridLayoutManager.VERTICAL;
     }
 
     public GridLayoutItemDecoration(int count, int orientation) {
         mSpanCount = count;
-        setMargin(20, 20);
+        setDivideParams(20, 20);
         setOrientation(orientation);
     }
 
     public GridLayoutItemDecoration(int count, int orientation, int horizonSpan, int verticalSpan) {
         this(count);
-        setMargin(horizonSpan, verticalSpan);
+        setDivideParams(horizonSpan, verticalSpan);
         setOrientation(orientation);
     }
 
@@ -81,7 +81,7 @@ public class GridLayoutItemDecoration extends RecyclerView.ItemDecoration {
         return false;
     }
 
-    public void setMargin(int horizon, int vertical) {
+    public void setDivideParams(int horizon, int vertical) {
         mHorizonSpan = horizon;
         mVerticalSpan = vertical;
     }

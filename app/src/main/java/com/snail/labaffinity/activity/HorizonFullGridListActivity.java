@@ -7,11 +7,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.snail.labaffinity.R;
-import com.snail.labaffinity.adapter.BaseHorizionAdapter;
-import com.snail.labaffinity.itemdorc.ExpandedLinearLayoutManager;
-import com.snail.labaffinity.itemdorc.LinearItemDecoration;
-
-import butterknife.ButterKnife;
+import com.snail.labaffinity.adapter.BaseHorizonAdapter;
+import com.snail.labaffinity.itemdorc.ExpandedGridLayoutManager;
+import com.snail.labaffinity.itemdorc.GridLayoutItemDecoration;
 
 /**
  * Author: lishang
@@ -19,7 +17,7 @@ import butterknife.ButterKnife;
  * Des:
  * version:
  */
-public class HoriziontFullLinearListActivity extends AppCompatActivity {
+public class HorizonFullGridListActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
 
@@ -28,20 +26,17 @@ public class HoriziontFullLinearListActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_h_full_list);
-
-        ButterKnife.bind(this);
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
-
-        ExpandedLinearLayoutManager layoutManager = new ExpandedLinearLayoutManager(this);
+        ExpandedGridLayoutManager layoutManager = new ExpandedGridLayoutManager(this, 6);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        layoutManager.setAutoMeasureEnabled(false);
         mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setFocusable(false);
-//        防止滑动不流畅
-        mRecyclerView.setNestedScrollingEnabled(false);
-        LinearItemDecoration itemDecoration = new LinearItemDecoration();
+        layoutManager.setAutoMeasureEnabled(false);
+        GridLayoutItemDecoration itemDecoration = new GridLayoutItemDecoration(6);
+        itemDecoration.setDivideParams(10, 10);
         mRecyclerView.addItemDecoration(itemDecoration);
-        mRecyclerView.setAdapter(new BaseHorizionAdapter(40));
+        mRecyclerView.setAdapter(new BaseHorizonAdapter(70));
+        mRecyclerView.setNestedScrollingEnabled(false);
+//        recyclerview获取焦点自动滚动
+        mRecyclerView.setFocusable(false);
     }
-
 }

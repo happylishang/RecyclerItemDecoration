@@ -20,11 +20,12 @@
         </activity>
         <activity android:name=".activity.LinearListActivity"/>
         <activity android:name=".activity.GridListActivity"/>
-        <activity android:name=".activity.FullGrideListActivity"/>
+        <activity android:name=".activity.FullGridListActivity"/>
         <activity android:name=".activity.FullLinearListActivity"/>
         <activity android:name=".activity.WrapRecycleViewActivity"/>
         <activity android:name=".activity.DefaultLinearListActivity"/>
-        <activity android:name=".activity.HoriziontFullLinearListActivity"/>
+        <activity android:name=".activity.HorizonFullLinearListActivity"/>
+        <activity android:name=".activity.HorizonFullGridListActivity"/>
     </application>
 
 </manifest>

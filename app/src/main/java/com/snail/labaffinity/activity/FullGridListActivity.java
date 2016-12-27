@@ -16,7 +16,7 @@ import com.snail.labaffinity.itemdorc.GridLayoutItemDecoration;
  * Des:
  * version:
  */
-public class FullGrideListActivity extends AppCompatActivity {
+public class FullGridListActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     //    线性的没多大用途
@@ -28,10 +28,10 @@ public class FullGrideListActivity extends AppCompatActivity {
         ExpandedGridLayoutManager layoutManager = new ExpandedGridLayoutManager(this, 4);
         mRecyclerView.setLayoutManager(layoutManager);
         layoutManager.setAutoMeasureEnabled(false);
-        GridLayoutItemDecoration grideItemDorcration = new GridLayoutItemDecoration( 4);
-        grideItemDorcration.setMargin(10, 10);
-        mRecyclerView.addItemDecoration(grideItemDorcration);
-        mRecyclerView.setAdapter(new BaseVerticalAdapter(100));
+        GridLayoutItemDecoration itemDecoration = new GridLayoutItemDecoration( 4);
+        itemDecoration.setDivideParams(10, 10);
+        mRecyclerView.addItemDecoration(itemDecoration);
+        mRecyclerView.setAdapter(new BaseVerticalAdapter(70));
         mRecyclerView.setNestedScrollingEnabled(false);
 //        recyclerview获取焦点自动滚动
         mRecyclerView.setFocusable(false);

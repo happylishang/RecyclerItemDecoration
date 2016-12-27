@@ -58,11 +58,6 @@ public class ExpandedLinearLayoutManager extends LinearLayoutManager {
         }
         measureHeight = heightMode == View.MeasureSpec.EXACTLY ? heightSize : measureHeight;
         measureWidth = widthMode == View.MeasureSpec.EXACTLY ? widthSize : measureWidth;
-        if (getOrientation() == VERTICAL && measureWidth > widthSize) {
-            measureWidth = widthSize;
-        } else if (getOrientation() == HORIZONTAL && measureHeight > heightSize) {
-            measureHeight = heightSize;
-        }
         setMeasuredDimension(measureWidth, measureHeight);
     }
 

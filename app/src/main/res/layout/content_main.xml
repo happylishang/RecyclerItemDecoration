@@ -53,11 +53,11 @@
       />
 
     <Button
-        android:id="@+id/wrap_linear"
+        android:id="@+id/HorizonFullGridListActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="WrapLayoutItemDorc"
-        android:visibility="gone"/>
+        android:text="水平展开网格式布局"
+   />
 
 
 </LinearLayout>
