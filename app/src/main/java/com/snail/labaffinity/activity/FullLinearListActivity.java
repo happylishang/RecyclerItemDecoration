@@ -41,6 +41,7 @@ public class FullLinearListActivity extends AppCompatActivity {
         layoutManager.setAutoMeasureEnabled(false);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setFocusable(false);
+//        防止滑动不流畅
         mRecyclerView.setNestedScrollingEnabled(false);
         LinearItemDecoration itemDecoration = new LinearItemDecoration( LinearLayoutManager.VERTICAL);
         mRecyclerView.addItemDecoration(itemDecoration);

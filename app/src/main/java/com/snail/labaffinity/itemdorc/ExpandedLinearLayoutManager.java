@@ -13,7 +13,7 @@ import android.view.View;
 public class ExpandedLinearLayoutManager extends LinearLayoutManager {
 
     /**
-     * 最大展示的数目
+     * 最大展示的数目，如果设置了，就会按照最大数目显示，不过注意在代码中 设置 RecyclerView.setNestedScrollingEnabled(true);
      */
     private int mMaxItemCount = -1;
 
@@ -65,7 +65,6 @@ public class ExpandedLinearLayoutManager extends LinearLayoutManager {
         }
         setMeasuredDimension(measureWidth, measureHeight);
     }
-
 
     private int[] getChildDimension(RecyclerView.Recycler recycler, int position) {
         try {
