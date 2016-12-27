@@ -11,6 +11,12 @@ import android.view.View;
  * Created by lishang on 16/5/11.
  */
 public class ExpandedLinearLayoutManager extends LinearLayoutManager {
+
+    /**
+     * 最大展示的数目
+     */
+    private int mMaxItemCount = -1;
+
     public ExpandedLinearLayoutManager(Context context) {
         super(context);
     }
@@ -23,12 +29,6 @@ public class ExpandedLinearLayoutManager extends LinearLayoutManager {
         super(context, orientation, reverseLayout);
     }
 
-
-    /**
-     * 最大展示的数目
-     */
-    private int mMaxItemCount = -1;
-
     @Override
     public void onMeasure(RecyclerView.Recycler recycler, RecyclerView.State state,
                           int widthSpec, int heightSpec) {
@@ -36,58 +36,40 @@ public class ExpandedLinearLayoutManager extends LinearLayoutManager {
         final int heightMode = View.MeasureSpec.getMode(heightSpec);
         final int widthSize = View.MeasureSpec.getSize(widthSpec);
         final int heightSize = View.MeasureSpec.getSize(heightSpec);
-        int width = 0;
-        int height = 0;
+        int measureWidth = 0;
+        int measureHeight = 0;
         int count;
-//
         if (mMaxItemCount < 0 || getItemCount() < mMaxItemCount) {
             count = getItemCount();
         } else {
             count = mMaxItemCount;
         }
         for (int i = 0; i < count; i++) {
-            int[] measuredDimension = new int[2];
-            measureScrapChild(recycler, i,
-                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
-                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
-                    measuredDimension);
-
+            int[] measuredDimension = getChildDimension(recycler, i);
+            if (measuredDimension == null || measuredDimension.length != 2)
+                return;
             if (getOrientation() == HORIZONTAL) {
-                width = width + measuredDimension[0];
-                if (i == 0) {
-                    height = measuredDimension[1];
-                }
+                measureWidth = measureWidth + measuredDimension[0];
+                measureHeight = Math.max(measureHeight, measuredDimension[1]);
             } else {
-                height = height + measuredDimension[1];
-                if (i == 0) {
-                    width = measuredDimension[0];
-                }
+                measureHeight = measureHeight + measuredDimension[1];
+                measureWidth = Math.max(measureWidth, measuredDimension[0]);
             }
         }
-        switch (heightMode) {
-            case View.MeasureSpec.EXACTLY:
-                height = heightSize;
-            case View.MeasureSpec.AT_MOST:
-            case View.MeasureSpec.UNSPECIFIED:
+        measureHeight = heightMode == View.MeasureSpec.EXACTLY ? heightSize : measureHeight;
+        measureWidth = widthMode == View.MeasureSpec.EXACTLY ? widthSize : measureWidth;
+        if (getOrientation() == VERTICAL && measureWidth > widthSize) {
+            measureWidth = widthSize;
+        } else if (getOrientation() == HORIZONTAL && measureHeight > heightSize) {
+            measureHeight = heightSize;
         }
-        switch (widthMode) {
-            case View.MeasureSpec.EXACTLY:
-                width = widthSize;
-            case View.MeasureSpec.AT_MOST:
-            case View.MeasureSpec.UNSPECIFIED:
-        }
-        if (getOrientation() == VERTICAL && width > widthSize) {
-            width = widthSize;
-        } else if (getOrientation() == HORIZONTAL && height > heightSize) {
-            height = heightSize;
-        }
-        setMeasuredDimension(width, height);
+        setMeasuredDimension(measureWidth, measureHeight);
     }
 
 
-    private void measureScrapChild(RecyclerView.Recycler recycler, int position, int widthSpec,
-                                   int heightSpec, int[] measuredDimension) {
+    private int[] getChildDimension(RecyclerView.Recycler recycler, int position) {
         try {
+            int[] measuredDimension = new int[2];
             View view = recycler.getViewForPosition(position);
             //测量childView，以便获得宽高（包括ItemDecoration的限制）
             super.measureChildWithMargins(view, 0, 0);
@@ -95,9 +77,11 @@ public class ExpandedLinearLayoutManager extends LinearLayoutManager {
             RecyclerView.LayoutParams p = (RecyclerView.LayoutParams) view.getLayoutParams();
             measuredDimension[0] = getDecoratedMeasuredWidth(view) + p.leftMargin + p.rightMargin;
             measuredDimension[1] = getDecoratedMeasuredHeight(view) + p.bottomMargin + p.topMargin;
+            return measuredDimension;
         } catch (Exception e) {
             Log.d("LayoutManager", e.toString());
         }
+        return null;
     }
 
     public void setMaxItemCount(int maxItemCount) {
