@@ -5,20 +5,14 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.ViewTreeObserver;
 import android.widget.ScrollView;
-import android.widget.Toast;
 
 import com.snail.labaffinity.R;
-import com.snail.labaffinity.SimpleOnItemTouchListener.SimpleOnItemClickLister;
 import com.snail.labaffinity.adapter.BaseAdapter;
 import com.snail.labaffinity.itemdorc.ExpandedLinearLayoutManager;
 import com.snail.labaffinity.itemdorc.LinearItemDecoration;
-import com.snail.labaffinity.viewholder.ItemViewHolder;
 
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Author: lishang
@@ -47,45 +41,10 @@ public class FullLinearListActivity extends AppCompatActivity {
         layoutManager.setAutoMeasureEnabled(false);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setFocusable(false);
-        mRecyclerView.addOnItemTouchListener(new SimpleOnItemClickLister<ItemViewHolder>(mRecyclerView) {
-
-            @Override
-            public void onItemClick(ItemViewHolder vh, int postion) {
-                Toast.makeText(FullLinearListActivity.this, "" + postion, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-//        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//        mRecyclerView.setLayoutManager(linearLayoutManager);
-
         mRecyclerView.setNestedScrollingEnabled(false);
-        LinearItemDecoration grideItemDorcration = new LinearItemDecoration( LinearLayoutManager.VERTICAL);
-        mRecyclerView.addItemDecoration(grideItemDorcration);
+        LinearItemDecoration itemDecoration = new LinearItemDecoration( LinearLayoutManager.VERTICAL);
+        mRecyclerView.addItemDecoration(itemDecoration);
         mRecyclerView.setAdapter(new BaseAdapter(40));
-        mRecyclerView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
-
-            @Override
-            public void onScrollChanged() {
-                Log.v("lishang", "mRecyclerView s  " + mRecyclerView.getMeasuredHeight());
-            }
-        });
-//        mRecyclerView.setHasFixedSize(false);
-
-
-        mScrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
-            @Override
-            public void onScrollChanged() {
-                Log.v("lishang", " s " + mScrollView.getScrollY());
-            }
-        });
-
     }
 
-    @OnClick(R.id.btn)
-    void btn() {
-        int i = 0;
-        Log.v("lishang", "" + mRecyclerView.getMeasuredHeight());
-        i++;
-    }
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -23,7 +24,10 @@ public class ExpandedLinearLayoutManager extends LinearLayoutManager {
     }
 
 
-    private int[] mMeasuredDimension = new int[2];
+    /**
+     * 最大展示的数目
+     */
+    private int mMaxItemCount = -1;
 
     @Override
     public void onMeasure(RecyclerView.Recycler recycler, RecyclerView.State state,
@@ -36,30 +40,30 @@ public class ExpandedLinearLayoutManager extends LinearLayoutManager {
         int height = 0;
         int count;
 //
-        if (mMaxtItemCount < 0 || getItemCount() < mMaxtItemCount) {
+        if (mMaxItemCount < 0 || getItemCount() < mMaxItemCount) {
             count = getItemCount();
         } else {
-            count = mMaxtItemCount;
+            count = mMaxItemCount;
         }
         for (int i = 0; i < count; i++) {
+            int[] measuredDimension = new int[2];
             measureScrapChild(recycler, i,
                     View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
                     View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
-                    mMeasuredDimension);
+                    measuredDimension);
 
             if (getOrientation() == HORIZONTAL) {
-                width = width + mMeasuredDimension[0];
+                width = width + measuredDimension[0];
                 if (i == 0) {
-                    height = mMeasuredDimension[1];
+                    height = measuredDimension[1];
                 }
             } else {
-                height = height + mMeasuredDimension[1];
+                height = height + measuredDimension[1];
                 if (i == 0) {
-                    width = mMeasuredDimension[0];
+                    width = measuredDimension[0];
                 }
             }
         }
-        // If child view is more than screen size, there is no need to make it wrap content. We can use original onMeasure() so we can scroll view.
         switch (heightMode) {
             case View.MeasureSpec.EXACTLY:
                 height = heightSize;
@@ -72,7 +76,6 @@ public class ExpandedLinearLayoutManager extends LinearLayoutManager {
             case View.MeasureSpec.AT_MOST:
             case View.MeasureSpec.UNSPECIFIED:
         }
-
         if (getOrientation() == VERTICAL && width > widthSize) {
             width = widthSize;
         } else if (getOrientation() == HORIZONTAL && height > heightSize) {
@@ -85,29 +88,19 @@ public class ExpandedLinearLayoutManager extends LinearLayoutManager {
     private void measureScrapChild(RecyclerView.Recycler recycler, int position, int widthSpec,
                                    int heightSpec, int[] measuredDimension) {
         try {
-
-        View view = recycler.getViewForPosition(position);
-        // For adding Item Decor Insets to view
-        super.measureChildWithMargins(view, 0, 0);
-        if (view != null) {
-
+            View view = recycler.getViewForPosition(position);
+            //测量childView，以便获得宽高（包括ItemDecoration的限制）
+            super.measureChildWithMargins(view, 0, 0);
+            //获取childView，以便获得宽高（包括ItemDecoration的限制），以及边距
             RecyclerView.LayoutParams p = (RecyclerView.LayoutParams) view.getLayoutParams();
-
-            // Get decorated measurements
             measuredDimension[0] = getDecoratedMeasuredWidth(view) + p.leftMargin + p.rightMargin;
             measuredDimension[1] = getDecoratedMeasuredHeight(view) + p.bottomMargin + p.topMargin;
-//            为什么这里去了，就不会有最底层的一个Itemdocration呢？？
-//            recycler.recycleView(view);
-        }    }catch (Exception e){
-
+        } catch (Exception e) {
+            Log.d("LayoutManager", e.toString());
         }
     }
 
-    private int mMaxtItemCount = -1;
-
     public void setMaxItemCount(int maxItemCount) {
-
-        mMaxtItemCount = maxItemCount;
+        mMaxItemCount = maxItemCount;
     }
-
 }

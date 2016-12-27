@@ -22,11 +22,11 @@ public class GridListActivity extends BaseListActivity {
         super.onCreate(savedInstanceState);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 6);
         mRecyclerView.setLayoutManager(layoutManager);
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
-        GridLayoutItemDecoration grideItemDorcration = new GridLayoutItemDecoration( 6);
-        grideItemDorcration.setMargin(10, 10);
-        mRecyclerView.addItemDecoration(grideItemDorcration);
+        GridLayoutItemDecoration itemDecoration = new GridLayoutItemDecoration(6);
+        itemDecoration.setMargin(10, 10);
+        mRecyclerView.addItemDecoration(itemDecoration);
         mRecyclerView.setAdapter(new BaseAdapter(100));
     }
 }
