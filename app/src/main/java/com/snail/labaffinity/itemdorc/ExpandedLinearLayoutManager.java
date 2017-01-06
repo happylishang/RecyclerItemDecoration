@@ -56,9 +56,25 @@ public class ExpandedLinearLayoutManager extends LinearLayoutManager {
                 measureWidth = Math.max(measureWidth, measuredDimension[0]);
             }
         }
+        measureHeight = measureHeight + getPaddingBottom() + getPaddingTop();
+        measureWidth = measureWidth + getPaddingLeft() + getPaddingRight();
         measureHeight = heightMode == View.MeasureSpec.EXACTLY ? heightSize : measureHeight;
         measureWidth = widthMode == View.MeasureSpec.EXACTLY ? widthSize : measureWidth;
-        setMeasuredDimension(measureWidth, measureHeight);
+        if (getOrientation() == HORIZONTAL && measureWidth > widthSize) {
+            if (widthMode == View.MeasureSpec.UNSPECIFIED) {
+                setMeasuredDimension(measureWidth, measureHeight);
+            } else {
+                super.onMeasure(recycler, state, widthSpec, heightSpec);
+            }
+        } else if (getOrientation() == VERTICAL && measureHeight > heightSize) {
+            if (heightMode == View.MeasureSpec.UNSPECIFIED) {
+                setMeasuredDimension(measureWidth, measureHeight);
+            } else {
+                super.onMeasure(recycler, state, widthSpec, heightSpec);
+            }
+        } else {
+            setMeasuredDimension(measureWidth, measureHeight);
+        }
     }
 
     private int[] getChildDimension(RecyclerView.Recycler recycler, int position) {
