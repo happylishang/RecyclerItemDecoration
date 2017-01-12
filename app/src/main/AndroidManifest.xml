@@ -26,6 +26,7 @@
         <activity android:name=".activity.DefaultLinearListActivity"/>
         <activity android:name=".activity.HorizonFullLinearListActivity"/>
         <activity android:name=".activity.HorizonFullGridListActivity"/>
+        <activity android:name=".activity.MaxHeightFullLinearListActivity"/>
     </application>
 
 </manifest>

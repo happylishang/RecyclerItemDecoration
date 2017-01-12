@@ -59,5 +59,10 @@
         android:text="水平展开网格式布局"
    />
 
-
+    <Button
+        android:id="@+id/max_height"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="最大高度设置"
+        />
 </LinearLayout>

@@ -3,7 +3,6 @@ package com.snail.labaffinity.itemdorc;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
@@ -19,14 +18,6 @@ public class ExpandedLinearLayoutManager extends LinearLayoutManager {
 
     public ExpandedLinearLayoutManager(Context context) {
         super(context);
-    }
-
-    public ExpandedLinearLayoutManager(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-    }
-
-    public ExpandedLinearLayoutManager(Context context, int orientation, boolean reverseLayout) {
-        super(context, orientation, reverseLayout);
     }
 
     @Override
@@ -64,13 +55,13 @@ public class ExpandedLinearLayoutManager extends LinearLayoutManager {
             if (widthMode == View.MeasureSpec.UNSPECIFIED) {
                 setMeasuredDimension(measureWidth, measureHeight);
             } else {
-                super.onMeasure(recycler, state, widthSpec, heightSpec);
+                super.onMeasure(recycler, state, widthSize, heightSpec);
             }
         } else if (getOrientation() == VERTICAL && measureHeight > heightSize) {
             if (heightMode == View.MeasureSpec.UNSPECIFIED) {
                 setMeasuredDimension(measureWidth, measureHeight);
             } else {
-                super.onMeasure(recycler, state, widthSpec, heightSpec);
+                setMeasuredDimension(measureWidth, heightSize);
             }
         } else {
             setMeasuredDimension(measureWidth, measureHeight);

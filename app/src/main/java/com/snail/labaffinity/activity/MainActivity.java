@@ -85,5 +85,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, HorizonFullGridListActivity.class);
         startActivity(intent);
     }
+    @OnClick(R.id.max_height)
+    void max_height() {
+        Intent intent = new Intent(this, MaxHeightFullLinearListActivity.class);
+        startActivity(intent);
+    }
 
 }
