@@ -1,6 +1,7 @@
 package com.snail.labaffinity.itemdorc;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -36,7 +37,7 @@ public class ExpandedLinearLayoutManager extends LinearLayoutManager {
             count = mMaxItemCount;
         }
         for (int i = 0; i < count; i++) {
-            int[] measuredDimension = getChildDimension(recycler, i);
+            int[] measuredDimension = getChildDimension(recycler, i, widthSpec, heightSpec);
             if (measuredDimension == null || measuredDimension.length != 2)
                 return;
             if (getOrientation() == HORIZONTAL) {
@@ -68,16 +69,19 @@ public class ExpandedLinearLayoutManager extends LinearLayoutManager {
         }
     }
 
-    private int[] getChildDimension(RecyclerView.Recycler recycler, int position) {
+    private int[] getChildDimension(RecyclerView.Recycler recycler, int position, int widthSpec, int heightSpec) {
         try {
             int[] measuredDimension = new int[2];
             View view = recycler.getViewForPosition(position);
-            //测量childView，以便获得宽高（包括ItemDecoration的限制）
-            super.measureChildWithMargins(view, 0, 0);
             //获取childView，以便获得宽高（包括ItemDecoration的限制），以及边距
             RecyclerView.LayoutParams p = (RecyclerView.LayoutParams) view.getLayoutParams();
-            measuredDimension[0] = getDecoratedMeasuredWidth(view) + p.leftMargin + p.rightMargin;
-            measuredDimension[1] = getDecoratedMeasuredHeight(view) + p.bottomMargin + p.topMargin;
+            Rect outRect = new Rect();
+            // Android7.0不知道你做了什么，Textview的处理不太兼容，否则super.measureChild(view,0,0,);就够了
+            // super.measureChild(view,0,0,); 其实用自定的可能还是有问题，比如边距之类的，所以，如果不是全展开还是用默认的
+            measureChildInSelf(view, widthSpec, heightSpec);
+            calculateItemDecorationsForChild(view, outRect);
+            measuredDimension[0] = view.getMeasuredWidth() + outRect.left + outRect.right + p.leftMargin + p.rightMargin;
+            measuredDimension[1] = view.getMeasuredHeight() + outRect.top + outRect.bottom + p.bottomMargin + p.topMargin;
             return measuredDimension;
         } catch (Exception e) {
             Log.d("LayoutManager", e.toString());
@@ -87,5 +91,23 @@ public class ExpandedLinearLayoutManager extends LinearLayoutManager {
 
     public void setMaxItemCount(int maxItemCount) {
         mMaxItemCount = maxItemCount;
+    }
+
+    //自行测量，不用LayoutManager自带的，自带的时机有时候不好把控，
+    public void measureChildInSelf(View child, int widthSpec, int heightSpec) {
+        int widthSize = View.MeasureSpec.getSize(widthSpec);
+        int widthMode = View.MeasureSpec.getMode(widthSpec);
+        int heightSize = View.MeasureSpec.getSize(heightSpec);
+        int heightMode = View.MeasureSpec.getMode(heightSpec);
+        final RecyclerView.LayoutParams lp = (RecyclerView.LayoutParams) child.getLayoutParams();
+        int newWidthSpec = getChildMeasureSpec(widthSize, widthMode,
+                getPaddingLeft() + getPaddingRight(), lp.width, getOrientation() == HORIZONTAL);
+        int newHeightSpec = getChildMeasureSpec(heightSize, heightMode,
+                getPaddingBottom() + getPaddingTop(), lp.width, getOrientation() == VERTICAL);
+        if (getOrientation() == VERTICAL) {
+            child.measure(newWidthSpec, 0);
+        } else {
+            child.measure(0, newHeightSpec);
+        }
     }
 }
