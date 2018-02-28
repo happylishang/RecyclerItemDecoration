@@ -12,6 +12,8 @@ import com.snail.labaffinity.adapter.BaseVerticalAdapter;
 import com.snail.labaffinity.itemdorc.ExpandedLinearLayoutManager;
 import com.snail.labaffinity.itemdorc.LinearItemDecoration;
 
+import java.util.Random;
+
 import butterknife.ButterKnife;
 
 /**
@@ -43,9 +45,9 @@ public class MaxHeightFullLinearListActivity extends AppCompatActivity {
         mRecyclerView.setFocusable(false);
 //        防止滑动不流畅
         mRecyclerView.setNestedScrollingEnabled(false);
-        LinearItemDecoration itemDecoration = new LinearItemDecoration(  );
+        LinearItemDecoration itemDecoration = new LinearItemDecoration();
         mRecyclerView.addItemDecoration(itemDecoration);
-        mRecyclerView.setAdapter(new BaseVerticalAdapter(40));
+        mRecyclerView.setAdapter(new BaseVerticalAdapter(new Random().nextInt(2) % 2 == 0 ? 2 : 10));
     }
 
 }

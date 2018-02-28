@@ -29,15 +29,16 @@ public class BaseVerticalAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 //        }
 //        textView.setGravity(Gravity.CENTER);
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_vertical,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_vertical, parent, false);
         return new ItemViewHolder(view);
     }
 
     private int mCount;
+
     @Override
     public void onBindViewHolder(ItemViewHolder holder, int position) {
 
-        holder.renderView("" + position);
+        holder.renderView("adf \nsfsdf\n" + position);
     }
 
     @Override
@@ -45,7 +46,7 @@ public class BaseVerticalAdapter extends RecyclerView.Adapter<ItemViewHolder> {
         return mCount;
     }
 
-   public BaseVerticalAdapter(int size){
-        mCount =size;
+    public BaseVerticalAdapter(int size) {
+        mCount = size;
     }
 }

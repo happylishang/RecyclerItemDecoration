@@ -1,5 +1,6 @@
 package com.snail.labaffinity.activity;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -46,6 +47,11 @@ public class FullLinearListActivity extends AppCompatActivity {
         LinearItemDecoration itemDecoration = new LinearItemDecoration(  );
         mRecyclerView.addItemDecoration(itemDecoration);
         mRecyclerView.setAdapter(new BaseVerticalAdapter(40));
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
     }
 
 }
