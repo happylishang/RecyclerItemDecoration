@@ -34,7 +34,7 @@ public class HorizonFullGridListActivity extends AppCompatActivity {
         GridLayoutItemDecoration itemDecoration = new GridLayoutItemDecoration(6);
         itemDecoration.setDivideParams(10, 10);
         mRecyclerView.addItemDecoration(itemDecoration);
-        mRecyclerView.setAdapter(new BaseHorizonAdapter(70));
+        mRecyclerView.setAdapter(new BaseHorizonAdapter(100));
         mRecyclerView.setNestedScrollingEnabled(false);
 //        recyclerview获取焦点自动滚动
         mRecyclerView.setFocusable(false);
