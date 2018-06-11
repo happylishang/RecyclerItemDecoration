@@ -10,9 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-
 /**
- * Author: hzlishang
  * Data: 17-7-3 下午8:27
  * Des:
  * version:
@@ -44,22 +42,50 @@ public class LinearItemDecoration extends RecyclerView.ItemDecoration {
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
 
-        int count = mShowLastLine ? parent.getAdapter().getItemCount() : parent.getAdapter().getItemCount() - 1;
+        int count = parent.getAdapter().getItemCount() - 1;
+        count += mShowLastLine ? 1 : 0;
+        count += mShowFirstLine ? 1 : 0;
+
         if (isVertical(parent)) {
-            if (parent.getChildAdapterPosition(view) < count) {
-                outRect.set(0, 0, 0, mSpanSpace);
+            //  如果顶部展示一个占位
+            if (mShowFirstLine) {
+                if (parent.getChildAdapterPosition(view) < count) {
+                    if (parent.getChildAdapterPosition(view) == 0) {
+                        outRect.set(0, mSpanSpace, 0, mSpanSpace);
+                    } else {
+                        outRect.set(0, 0, 0, mSpanSpace);
+                    }
+                } else {
+                    outRect.set(0, 0, 0, 0);
+                }
             } else {
-                outRect.set(0, 0, 0, 0);
+                if (parent.getChildAdapterPosition(view) < count) {
+                    outRect.set(0, 0, 0, mSpanSpace);
+                } else {
+                    outRect.set(0, 0, 0, 0);
+                }
             }
         } else {
-            if (parent.getChildAdapterPosition(view) < count) {
-                outRect.set(0, 0, mSpanSpace, 0);
+            //  如果左边展示一个占位
+            if (mShowFirstLine) {
+                if (parent.getChildAdapterPosition(view) < count) {
+                    if (parent.getChildAdapterPosition(view) == 0) {
+                        outRect.set(mSpanSpace, 0, mSpanSpace, 0);
+                    } else {
+                        outRect.set(0, 0, mSpanSpace, 0);
+                    }
+                } else {
+                    outRect.set(0, 0, 0, 0);
+                }
             } else {
-                outRect.set(0, 0, 0, 0);
+                if (parent.getChildAdapterPosition(view) < count) {
+                    outRect.set(0, 0, mSpanSpace, 0);
+                } else {
+                    outRect.set(0, 0, 0, 0);
+                }
             }
         }
     }
-
 
     private boolean isVertical(RecyclerView parent) {
         RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
@@ -86,20 +112,26 @@ public class LinearItemDecoration extends RecyclerView.ItemDecoration {
         final int right = parent.getWidth() - parent.getPaddingRight();
         final int childCount = parent.getChildCount();
         for (int i = 0; i < childCount; i++) {
-            final View child = parent.getChildAt(i);
-            final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child
+
+            View child = parent.getChildAt(i);
+            RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child
                     .getLayoutParams();
-            final int top = child.getBottom() + params.bottomMargin +
+            int top = child.getBottom() + params.bottomMargin +
                     Math.round(ViewCompat.getTranslationY(child));
-            final int bottom = top + mSpanSpace;
-            int count = mShowLastLine ? parent.getAdapter().getItemCount() : parent.getAdapter().getItemCount() - 1;
-            if (i < count) {
+            int bottom = top + mSpanSpace;
+            if (mShowLastLine || i < childCount - 1) {
                 mDivider.setBounds(left, top, right, bottom);
                 mDivider.draw(c);
-            } else {
-                mDivider.setBounds(left, top, right, top);
+            }
+
+            if (mShowFirstLine && i == 0) {
+                bottom = child.getTop()  +
+                        Math.round(ViewCompat.getTranslationY(child));
+                top = bottom - mSpanSpace;
+                mDivider.setBounds(left, top, right, bottom);
                 mDivider.draw(c);
             }
+
         }
     }
 
@@ -108,14 +140,20 @@ public class LinearItemDecoration extends RecyclerView.ItemDecoration {
         final int bottom = parent.getHeight() - parent.getPaddingBottom();
         final int childCount = parent.getChildCount();
         for (int i = 0; i < childCount; i++) {
-            final View child = parent.getChildAt(i);
-            final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child
+            View child = parent.getChildAt(i);
+            RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child
                     .getLayoutParams();
-            final int left = child.getRight() + params.rightMargin +
+            int left = child.getRight() + params.rightMargin +
                     Math.round(ViewCompat.getTranslationX(child));
-            final int right = left + mSpanSpace;
-            int count = mShowLastLine ? parent.getAdapter().getItemCount() : parent.getAdapter().getItemCount() - 1;
-            if (i < count) {
+            int right = left + mSpanSpace;
+            if (mShowLastLine || i < childCount - 1) {
+                mDivider.setBounds(left, top, right, bottom);
+                mDivider.draw(c);
+            }
+            if (mShowFirstLine && i == 0) {
+                left = child.getLeft() - params.leftMargin +
+                        Math.round(ViewCompat.getTranslationX(child));
+                right = left + mSpanSpace;
                 mDivider.setBounds(left, top, right, bottom);
                 mDivider.draw(c);
             }
@@ -127,5 +165,11 @@ public class LinearItemDecoration extends RecyclerView.ItemDecoration {
 
     public void setShowLastDivideLine(boolean show) {
         mShowLastLine = show;
+    }
+
+    private boolean mShowFirstLine;
+
+    public void setShowFirstDivideLine(boolean show) {
+        mShowFirstLine = show;
     }
 }
