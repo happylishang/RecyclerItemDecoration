@@ -125,13 +125,12 @@ public class LinearItemDecoration extends RecyclerView.ItemDecoration {
             }
 
             if (mShowFirstLine && i == 0) {
-                bottom = child.getTop()  +
+                bottom = child.getTop() - params.topMargin +
                         Math.round(ViewCompat.getTranslationY(child));
                 top = bottom - mSpanSpace;
                 mDivider.setBounds(left, top, right, bottom);
                 mDivider.draw(c);
             }
-
         }
     }
 
@@ -151,9 +150,9 @@ public class LinearItemDecoration extends RecyclerView.ItemDecoration {
                 mDivider.draw(c);
             }
             if (mShowFirstLine && i == 0) {
-                left = child.getLeft() - params.leftMargin +
+                right = child.getLeft() - params.leftMargin +
                         Math.round(ViewCompat.getTranslationX(child));
-                right = left + mSpanSpace;
+                left = right - mSpanSpace;
                 mDivider.setBounds(left, top, right, bottom);
                 mDivider.draw(c);
             }
