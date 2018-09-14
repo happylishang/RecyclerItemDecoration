@@ -29,7 +29,7 @@ public class FullGridListActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(layoutManager);
         layoutManager.setAutoMeasureEnabled(false);
         GridLayoutItemDecoration itemDecoration = new GridLayoutItemDecoration( 4);
-        itemDecoration.setDivideParams(10, 10);
+        itemDecoration.setGapSize(10, 10);
         mRecyclerView.addItemDecoration(itemDecoration);
         mRecyclerView.setAdapter(new BaseVerticalAdapter(70));
         mRecyclerView.setNestedScrollingEnabled(false);
