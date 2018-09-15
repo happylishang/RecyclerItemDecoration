@@ -38,6 +38,7 @@ public class BaseVerticalAdapter extends RecyclerView.Adapter<ItemViewHolder> {
     @Override
     public void onBindViewHolder(ItemViewHolder holder, int position) {
 
+
         holder.renderView("adf \nsfsdf\n" + position);
     }
 

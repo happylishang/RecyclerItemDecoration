@@ -13,13 +13,15 @@ import com.snail.labaffinity.R;
  * version:
  */
 public class ItemViewHolder extends RecyclerView.ViewHolder {
-    TextView mTextView ;
+    TextView mTextView;
+
     public ItemViewHolder(View itemView) {
         super(itemView);
         mTextView = (TextView) itemView.findViewById(R.id.id_num);
     }
 
     public void renderView(String item) {
+        mTextView.getLayoutParams().width = (mTextView.getResources().getDisplayMetrics().widthPixels - 5 * 20) / 6;
         mTextView.setText(item);
     }
 }

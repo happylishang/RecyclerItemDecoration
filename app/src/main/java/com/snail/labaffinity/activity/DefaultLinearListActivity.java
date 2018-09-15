@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.snail.labaffinity.SimpleOnItemTouchListener.SimpleOnItemClickLister;
 import com.snail.labaffinity.adapter.BaseVerticalAdapter;
+import com.snail.labaffinity.itemdorc.HeaderFooterLinearItemDecoration;
 import com.snail.labaffinity.viewholder.ItemViewHolder;
 
 /**
@@ -24,6 +25,9 @@ public class DefaultLinearListActivity extends BaseListActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(linearLayoutManager);
+        mRecyclerView.addItemDecoration(new HeaderFooterLinearItemDecoration.Builder().headerSpanSpace(100).footerSpanSpace(100).headerDividerColor(0xffff0000).build());
+        mRecyclerView.addItemDecoration(new HeaderFooterLinearItemDecoration.Builder().headerSpanSpace(100).footerSpanSpace(100).headerDividerColor(0xffff0000).footerDividerColor(0xffff0000).build());
+        mRecyclerView.addItemDecoration(new HeaderFooterLinearItemDecoration.Builder().headerSpanSpace(100).footerSpanSpace(100).headerDividerColor(0xffff0000).build());
         mRecyclerView.setAdapter(new BaseVerticalAdapter(30));
         mRecyclerView.addOnItemTouchListener(new SimpleOnItemClickLister<ItemViewHolder>(mRecyclerView) {
 
@@ -32,5 +36,7 @@ public class DefaultLinearListActivity extends BaseListActivity {
                 Toast.makeText(DefaultLinearListActivity.this, "" + postion, Toast.LENGTH_SHORT).show();
             }
         });
+
+
     }
 }

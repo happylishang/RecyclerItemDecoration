@@ -40,13 +40,17 @@ public class GridLayoutItemDecoration extends RecyclerView.ItemDecoration {
         setGapSize(horizonSpan, verticalSpan);
     }
 
+    public GridLayoutItemDecoration(GridLayoutManager layoutManager) {
+        this(layoutManager.getSpanCount());
+    }
+
     @Override
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
         drawHorizontal(c, parent);
         drawVertical(c, parent);
     }
 
-    public void drawVertical(Canvas c, RecyclerView parent) {
+    private void drawVertical(Canvas c, RecyclerView parent) {
         if (parent == null || parent.getAdapter() == null) {
             return;
         }
@@ -72,7 +76,7 @@ public class GridLayoutItemDecoration extends RecyclerView.ItemDecoration {
         }
     }
 
-    public void drawHorizontal(Canvas c, RecyclerView parent) {
+    private void drawHorizontal(Canvas c, RecyclerView parent) {
         if (parent == null || parent.getAdapter() == null) {
             return;
         }
