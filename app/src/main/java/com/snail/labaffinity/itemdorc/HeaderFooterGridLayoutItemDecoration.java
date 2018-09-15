@@ -53,7 +53,7 @@ public class HeaderFooterGridLayoutItemDecoration extends RecyclerView.ItemDecor
                     .getLayoutParams();
 
             final int left = child.getLeft() + params.leftMargin;
-            final int right = child.getRight() + params.rightMargin+mHorizonSpan;
+            final int right = child.getRight() + params.rightMargin + mHorizonSpan;
 
             if (isLastRaw(parent, i, mSpanCount, totalCount)) {
                 final int top = child.getBottom() + params.bottomMargin +
