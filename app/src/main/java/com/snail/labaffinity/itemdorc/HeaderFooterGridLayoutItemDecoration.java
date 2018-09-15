@@ -25,6 +25,8 @@ public class HeaderFooterGridLayoutItemDecoration extends RecyclerView.ItemDecor
     private Drawable mHeaderDivider;
     private Drawable mFooterDivider;
     private int mSpanCount;
+    private int mHorizonSpan;
+    private int mVerticalSpan;
 
     private HeaderFooterGridLayoutItemDecoration() {
     }
@@ -51,7 +53,7 @@ public class HeaderFooterGridLayoutItemDecoration extends RecyclerView.ItemDecor
                     .getLayoutParams();
 
             final int left = child.getLeft() + params.leftMargin;
-            final int right = child.getRight() + params.rightMargin;
+            final int right = child.getRight() + params.rightMargin+mHorizonSpan;
 
             if (isLastRaw(parent, i, mSpanCount, totalCount)) {
                 final int top = child.getBottom() + params.bottomMargin +
@@ -167,6 +169,8 @@ public class HeaderFooterGridLayoutItemDecoration extends RecyclerView.ItemDecor
         private int mHeaderDividerColor;
         private int mFooterDividerColor;
         private int mSpanCount;
+        private int mHorizonSpan;
+        private int mVerticalSpan;
 
         public HeaderFooterGridLayoutItemDecoration.Builder headerSpanSpace(int span) {
             mHeaderSpanSpace = span;
@@ -190,6 +194,16 @@ public class HeaderFooterGridLayoutItemDecoration extends RecyclerView.ItemDecor
 
         public HeaderFooterGridLayoutItemDecoration.Builder spanCount(int count) {
             mSpanCount = count;
+            return this;
+        }
+
+        public HeaderFooterGridLayoutItemDecoration.Builder verticalSpan(int span) {
+            mVerticalSpan = span;
+            return this;
+        }
+
+        public HeaderFooterGridLayoutItemDecoration.Builder horizonSpan(int span) {
+            mHeaderSpanSpace = span;
             return this;
         }
 
