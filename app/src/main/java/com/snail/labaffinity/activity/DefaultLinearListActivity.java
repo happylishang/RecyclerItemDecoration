@@ -36,7 +36,5 @@ public class DefaultLinearListActivity extends BaseListActivity {
                 Toast.makeText(DefaultLinearListActivity.this, "" + postion, Toast.LENGTH_SHORT).show();
             }
         });
-
-
     }
 }

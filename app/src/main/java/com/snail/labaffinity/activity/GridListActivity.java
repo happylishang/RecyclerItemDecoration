@@ -5,8 +5,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 
+import com.snail.labaffinity.R;
 import com.snail.labaffinity.adapter.BaseVerticalAdapter;
 import com.snail.labaffinity.itemdorc.GridLayoutItemDecoration;
+import com.snail.labaffinity.itemdorc.HeaderFooterGridLayoutItemDecoration;
 
 /**
  * Author: lishang
@@ -25,7 +27,15 @@ public class GridListActivity extends BaseListActivity {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
         GridLayoutItemDecoration itemDecoration = new GridLayoutItemDecoration(layoutManager);
+        itemDecoration.setPaddingColor(getResources().getColor(R.color.colorAccent));
         mRecyclerView.addItemDecoration(itemDecoration);
+        mRecyclerView.addItemDecoration(new HeaderFooterGridLayoutItemDecoration.Builder().
+                footerDividerColor(0xffff00ff).
+                footerSpanSpace(100).
+                headerDividerColor(0xffffff00).
+                headerSpanSpace(100).
+                spanCount(6).
+                build());
         mRecyclerView.setAdapter(new BaseVerticalAdapter(100));
     }
 }

@@ -66,7 +66,7 @@ public class GridLayoutItemDecoration extends RecyclerView.ItemDecoration {
             final int bottom = top + mVerticalSpan;
 
             final int left = child.getLeft() + params.leftMargin;
-            final int right = child.getRight() + params.rightMargin;
+            final int right = child.getRight() + params.rightMargin + mHorizonSpan;
 
             if (!isLastRaw(parent, i, mSpanCount, totalCount))
                 if (childCount - i > mSpanCount) {
