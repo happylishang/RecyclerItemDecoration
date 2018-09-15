@@ -214,6 +214,8 @@ public class HeaderFooterGridLayoutItemDecoration extends RecyclerView.ItemDecor
             decoration.mHeaderDivider = new ColorDrawable(mHeaderDividerColor);
             decoration.mFooterDivider = new ColorDrawable(mFooterDividerColor);
             decoration.mSpanCount = mSpanCount;
+            decoration.mHorizonSpan = mHorizonSpan;
+            decoration.mVerticalSpan = mVerticalSpan;
             return decoration;
         }
     }
