@@ -203,7 +203,7 @@ public class HeaderFooterGridLayoutItemDecoration extends RecyclerView.ItemDecor
         }
 
         public HeaderFooterGridLayoutItemDecoration.Builder horizonSpan(int span) {
-            mHeaderSpanSpace = span;
+            mHorizonSpan = span;
             return this;
         }
 
