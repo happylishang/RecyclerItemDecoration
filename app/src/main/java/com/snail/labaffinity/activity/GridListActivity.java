@@ -35,7 +35,6 @@ public class GridListActivity extends BaseListActivity {
                 headerDividerColor(0xffffff00).
                 headerSpanSpace(100).
                 spanCount(6).
-                horizonSpan(20).
                 build());
         mRecyclerView.setAdapter(new BaseVerticalAdapter(100));
     }

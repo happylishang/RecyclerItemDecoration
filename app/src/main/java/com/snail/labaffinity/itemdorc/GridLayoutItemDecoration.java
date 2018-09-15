@@ -67,12 +67,11 @@ public class GridLayoutItemDecoration extends RecyclerView.ItemDecoration {
 
             final int left = child.getLeft() + params.leftMargin;
             final int right = child.getRight() + params.rightMargin + mHorizonSpan;
-
-            if (!isLastRaw(parent, i, mSpanCount, totalCount))
-                if (childCount - i > mSpanCount) {
-                    drawable.setBounds(left, top, right, bottom);
-                    drawable.draw(c);
-                }
+            final int position = parent.getChildAdapterPosition(child);
+            if (!isLastRaw(parent, position, mSpanCount, totalCount)) {
+                drawable.setBounds(left, top, right, bottom);
+                drawable.draw(c);
+            }
         }
     }
 
@@ -92,7 +91,8 @@ public class GridLayoutItemDecoration extends RecyclerView.ItemDecoration {
             final int top = child.getTop() + params.topMargin;
             final int bottom = child.getBottom() + params.bottomMargin;
             final int right = left + mHorizonSpan;
-            if (!isLastColum(parent, i, mSpanCount, totalCount)) {
+            final int position = parent.getChildAdapterPosition(child);
+            if (!isLastColum(parent, position, mSpanCount, totalCount)) {
                 drawable.setBounds(left, top, right, bottom);
                 drawable.draw(c);
             }
